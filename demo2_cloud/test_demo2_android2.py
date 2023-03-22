@@ -33,3 +33,17 @@ class TestAndroidDeviceCloud(AppiumConfig):
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
         print(self.driver.page_source)
 
+    def test_invalid_sign_up_email_test(self):
+        self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Dismiss']").click()
+        #click on setting icon
+        #click on sign in
+        #click on sign up with email
+        #send firstnamea as john
+        #send lastname as peter
+        #send birthday Aug 20, 1995
+        #send password as welcome123
+        #send email as test123
+        #click on create
+        #assert the error message of mail id
+
+
