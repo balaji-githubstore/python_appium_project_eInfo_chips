@@ -51,20 +51,33 @@ class TestAndroidDeviceCloud(AppiumConfig):
         # self.driver.find_element(AppiumBy.XPATH, "//*[@text='Birthday']").send_keys("August 20, 1995")
         self.driver.find_element(AppiumBy.XPATH, "//*[@text='Birthday']").click()
 
-        #choose Aug
-        self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='android:id/numberpicker_input']").click()
-        self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='android:id/numberpicker_input']").clear()
-        self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='android:id/numberpicker_input']").send_keys("Aug")
+        actual_text = self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='android:id/numberpicker_input']").text
 
-        #choose 20
-        self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[2]").click()
-        self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[2]").clear()
-        self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[2]").send_keys("20")
+        day_xpath = None
+        month_xpath = None
 
-        #choose 1995
+        if len(actual_text) == 2:
+            day_xpath = "//*[@resource-id='android:id/numberpicker_input']"
+            month_xpath = "(//*[@resource-id='android:id/numberpicker_input'])[2]"
+        else:
+            month_xpath = "//*[@resource-id='android:id/numberpicker_input']"
+            day_xpath = "(//*[@resource-id='android:id/numberpicker_input'])[2]"
+
+        # choose Aug
+        self.driver.find_element(AppiumBy.XPATH, month_xpath).click()
+        self.driver.find_element(AppiumBy.XPATH, month_xpath).clear()
+        self.driver.find_element(AppiumBy.XPATH, month_xpath).send_keys("Aug")
+
+        # choose 20
+        self.driver.find_element(AppiumBy.XPATH, day_xpath).click()
+        self.driver.find_element(AppiumBy.XPATH, day_xpath).clear()
+        self.driver.find_element(AppiumBy.XPATH, day_xpath).send_keys("20")
+
+        # choose 1995
         self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[3]").click()
         self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[3]").clear()
-        self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[3]").send_keys("1995")
+        self.driver.find_element(AppiumBy.XPATH, "(//*[@resource-id='android:id/numberpicker_input'])[3]").send_keys(
+            "1995")
 
         self.driver.find_element(AppiumBy.XPATH, "//*[@text='OK']").click()
 
@@ -72,3 +85,4 @@ class TestAndroidDeviceCloud(AppiumConfig):
         # send email as test123
         # click on create
         # assert the error message of mail id
+
