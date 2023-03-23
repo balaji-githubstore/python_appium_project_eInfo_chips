@@ -28,12 +28,13 @@ class TestLogin(AppiumConfig):
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,'UiSelector().descriptionContains("e-mail address")').send_keys("dina")
 
         #convert below xpath to ANDROID_UIAUTOMATOR
-        self.driver.find_element(AppiumBy.XPATH, "//android.widget.EditText[contains(@content-desc,'Pass')]").send_keys(
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,'UiSelector().descriptionContains("pass")').send_keys(
             "dina123")
         # click on sign in
-        self.driver.find_element(AppiumBy.XPATH, "(//android.widget.TextView[@text='Sign in'])[2]").click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().text("Sign in").instance(1)').click()
         # get the text "There was an issue signing in" and print it
-        actual_error = self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'issue')]").text
+        actual_error = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().textContains("issue")').text
         print(actual_error)
-        actual_error = self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'issue')]").get_attribute("text")
+        actual_error = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().textContains("issue")').get_attribute("text")
         print(actual_error)
+
