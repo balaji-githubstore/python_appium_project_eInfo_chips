@@ -3,6 +3,7 @@ import time
 import pytest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from appium.webdriver.extensions.android.nativekey import AndroidKey
 
 """Swipe using appium default method"""
 
@@ -48,5 +49,13 @@ class TestArts(AppiumConfig):
         self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'Himal')]").click()
         self.driver.implicitly_wait(30)
 
-        time.sleep(5)
+        self.driver.press_keycode(AndroidKey.BACK)
 
+        self.driver.implicitly_wait(0)
+        while len(self.driver.find_elements(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().textContains("Himala")')) == 0:
+            self.driver.swipe(902, 1174, 902, 794, 1000)
+
+        self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'Himal')]").click()
+        self.driver.implicitly_wait(30)
+
+        time.sleep(5)
