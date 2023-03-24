@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 """ Open APP"""
+
+
 class AppiumConfig:
     @pytest.fixture(scope="function", autouse=True)
     def handle_app_launch(self):
@@ -14,8 +16,8 @@ class AppiumConfig:
             "platformName": "android",
             "deviceName": "oneplus",
             "appPackage": "org.khanacademy.android",
-            "appActivity":"org.khanacademy.android.ui.library.MainActivity",
-            "noReset":True
+            "appActivity": "org.khanacademy.android.ui.library.MainActivity",
+            "noReset": True
             # "udid":"emulator-5554"
         }
 
@@ -24,17 +26,17 @@ class AppiumConfig:
         yield
         self.driver.quit()
 
+
 class TestAndroidDeviceLocal(AppiumConfig):
     def test_invalid_login(self):
-
-        #presence of element - using length
-        if len(self.driver.find_elements(AppiumBy.XPATH,"//android.widget.TextView[@text='Dismiss']"))>0:
+        # presence of element - using length
+        if len(self.driver.find_elements(AppiumBy.ID, "//android.widget.TextView[@text='Dismiss']")) > 0:
             self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Dismiss']").click()
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
         self.driver.find_element(AppiumBy.XPATH,
-                            "//android.widget.EditText[@content-desc='Enter an e-mail address or username']").send_keys(
+                                 "//android.widget.EditText[@content-desc='Enter an e-mail address or username']").send_keys(
             "dina")
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.EditText[contains(@content-desc,'Pass')]").send_keys(
             "dina123")
@@ -45,8 +47,3 @@ class TestAndroidDeviceLocal(AppiumConfig):
         print(actual_error)
         actual_error = self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'issue')]").get_attribute("text")
         print(actual_error)
-
-
-
-
-

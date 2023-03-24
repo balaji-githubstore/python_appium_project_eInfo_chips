@@ -20,7 +20,7 @@ class AppiumConfig:
 
 class TestLogin(AppiumConfig):
     def test_invalid_login(self):
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().text("Dismiss")').click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, """UiSelector().text("Dismiss")""").click()
 
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().text("Sign in")').click()
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().text("Sign in")').click()

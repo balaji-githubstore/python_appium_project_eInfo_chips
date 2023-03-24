@@ -31,7 +31,7 @@ class TestArts(AppiumConfig):
         self.driver.find_element(AppiumBy.ID, "org.khanacademy.android:id/tab_bar_button_search").click()
 
         # ACCESSIBILITY_ID is content-desc in android
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID,"Search tab").click()
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Search tab").click()
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']").click()
 
@@ -39,15 +39,14 @@ class TestArts(AppiumConfig):
         # swipe until //android.widget.TextView[@text='Art of Asia'] presence
         #  self.driver.swipe(902, 1174,924, 794,1)
 
-        #scroll to art of asia and click
+        # scroll to art of asia and click
         para_dic = {"strategy": AppiumBy.ANDROID_UIAUTOMATOR, "selector": 'UiSelector().text("Art of Asia")'}
-        self.driver.execute_script("mobile: scroll",para_dic)
+        self.driver.execute_script("mobile: scroll", para_dic)
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Art of Asia']").click()
 
-        # scroll to the himalayas and click
+        # scroll to the himalayas and click it
         para_dic = {"strategy": AppiumBy.ANDROID_UIAUTOMATOR, "selector": 'UiSelector().textContains("Himala")'}
         self.driver.execute_script("mobile: scroll", para_dic)
 
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().textContains("Himala")').click()
-
