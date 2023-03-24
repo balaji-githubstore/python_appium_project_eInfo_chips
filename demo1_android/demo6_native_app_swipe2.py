@@ -4,7 +4,7 @@ import pytest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 
-"""Swipe using ANDROID_UIAUTOMATOR"""
+"""Swipe using appium default method"""
 
 
 class AppiumConfig:
@@ -27,27 +27,21 @@ class TestArts(AppiumConfig):
         if len(self.driver.find_elements(AppiumBy.XPATH, "//android.widget.TextView[@text='Dismiss']")) > 0:
             self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Dismiss']").click()
 
-        # id is resource-id only
         self.driver.find_element(AppiumBy.ID, "org.khanacademy.android:id/tab_bar_button_search").click()
-
-        # ACCESSIBILITY_ID is content-desc in android
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID,"Search tab").click()
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']").click()
 
         time.sleep(5)
+        self.driver.implicitly_wait(0)
+
         # swipe until //android.widget.TextView[@text='Art of Asia'] presence
-        #  self.driver.swipe(902, 1174,924, 794,1)
+        # len(self.driver.find_elements) - if it 0 then element is not present
+        # swipe when length is zero otherwise it comes out of while loop
+        while len(self.driver.find_elements(AppiumBy.XPATH, "//*[@text='Art of Asia']")) == 0:
+            self.driver.swipe(902, 1174, 902, 794, 1000)
 
-        #scroll to art of asia and click
-        para_dic = {"strategy": AppiumBy.ANDROID_UIAUTOMATOR, "selector": 'UiSelector().text("Art of Asia")'}
-        self.driver.execute_script("mobile: scroll",para_dic)
+        self.driver.find_element(AppiumBy.XPATH, "//*[@text='Art of Asia']").click()
 
-        self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Art of Asia']").click()
-
-        # scroll to the himalayas and click
-        para_dic = {"strategy": AppiumBy.ANDROID_UIAUTOMATOR, "selector": 'UiSelector().textContains("Himala")'}
-        self.driver.execute_script("mobile: scroll", para_dic)
-
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'UiSelector().textContains("Himala")').click()
-
+        self.driver.implicitly_wait(30)
+        time.sleep(5)
+        # will start at 11:30 AM IST
