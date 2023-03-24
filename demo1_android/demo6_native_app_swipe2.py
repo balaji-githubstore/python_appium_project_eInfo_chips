@@ -31,17 +31,22 @@ class TestArts(AppiumConfig):
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']").click()
 
-        time.sleep(5)
-        self.driver.implicitly_wait(0)
-
         # swipe until //android.widget.TextView[@text='Art of Asia'] presence
         # len(self.driver.find_elements) - if it 0 then element is not present
         # swipe when length is zero otherwise it comes out of while loop
+        self.driver.implicitly_wait(0)
         while len(self.driver.find_elements(AppiumBy.XPATH, "//*[@text='Art of Asia']")) == 0:
             self.driver.swipe(902, 1174, 902, 794, 1000)
 
         self.driver.find_element(AppiumBy.XPATH, "//*[@text='Art of Asia']").click()
-
         self.driver.implicitly_wait(30)
+
+        self.driver.implicitly_wait(0)
+        while len(self.driver.find_elements(AppiumBy.XPATH, "//*[contains(@text,'Himal')]")) == 0:
+            self.driver.swipe(902, 1174, 902, 794, 1000)
+
+        self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'Himal')]").click()
+        self.driver.implicitly_wait(30)
+
         time.sleep(5)
-        # will start at 11:30 AM IST
+
