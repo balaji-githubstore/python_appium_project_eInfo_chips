@@ -59,3 +59,7 @@ class TestArts(AppiumConfig):
         self.driver.implicitly_wait(30)
 
         time.sleep(5)
+
+# Please complete the assessment. Link in chat window.
+#Please feel free to leave the meeting once completed.
+#Let me know if any doubts or any issues with automation.
