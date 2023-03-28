@@ -43,14 +43,18 @@ class TestAndroidDeviceLocal(AppiumConfig):
             self.driver.activate_app("org.khanacademy.android.ui.library.MainActivity")
         else:
             self.driver.install_app(r"C:\Components\khan-academy-7-3-2.apk")
-            self.driver.activate_app("org.khanacademy.android.ui.library.MainActivity")
+            # self.driver.launch_app()
+            self.driver.activate_app("org.khanacademy.android")
+            self.driver.find_element(AppiumBy.XPATH, "//android.widget.Button[@text='Allow']").click()
+            # com.android.permissioncontroller: id / permission_allow_button
 
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
-        self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
-        self.driver.background_app(5)
+        # self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Sign in']").click()
+        # self.driver.background_app(5)
 
         print(self.driver.capabilities)
         print(self.driver.current_activity)
         print(self.driver.current_package)
         print(self.driver.device_time)
+        self.driver.remove_app("org.khanacademy.android")
         time.sleep(15)
