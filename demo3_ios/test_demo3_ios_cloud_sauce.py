@@ -39,7 +39,22 @@ class TestSampleApp(AppiumIosConfig):
                                                 "//XCUIElementTypeStaticText[contains(@name,'not match')]").text
         assert_that(actual_error).contains("Username and password do not match")
 
-    def test_add_to_cart(self):
+    def test_add_to_cart_method1(self):
+        self.driver.find_element(AppiumBy.NAME, "test-Username").send_keys("standard_user")
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeSecureTextField[@name='test-Password']").send_keys(
+            "secret_sauce")
+        self.driver.find_element(AppiumBy.IOS_PREDICATE, "name=='test-LOGIN'").click()
+
+        # add to cart 4 items
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-Cart']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//*[@name='test-CHECKOUT']").click()
+
+    def test_add_to_cart_method2(self):
         self.driver.find_element(AppiumBy.NAME, "test-Username").send_keys("standard_user")
         self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeSecureTextField[@name='test-Password']").send_keys(
             "secret_sauce")
@@ -68,7 +83,7 @@ class TestSampleApp(AppiumIosConfig):
 
         self.driver.find_element(AppiumBy.XPATH, "//*[@name='test-CHECKOUT']").click()
 
-    def test_add_to_cart_mobile_command(self):
+    def test_add_to_cart_mobile_command_method3(self):
         self.driver.find_element(AppiumBy.NAME, "test-Username").send_keys("standard_user")
         self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeSecureTextField[@name='test-Password']").send_keys(
             "secret_sauce")
