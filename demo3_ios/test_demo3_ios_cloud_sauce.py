@@ -104,4 +104,23 @@ class TestSampleApp(AppiumIosConfig):
         while not self.driver.find_element(AppiumBy.XPATH, "//*[@name='test-CHECKOUT']").is_displayed():
             self.driver.execute_script("mobile: scroll", {"direction": "down"})
 
+        # self.driver.find_element(AppiumBy.XPATH, "//*[@name='test-CHECKOUT']").click()
+
+    def test_add_to_cart_mobile_command_method4(self):
+        self.driver.find_element(AppiumBy.NAME, "test-Username").send_keys("standard_user")
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeSecureTextField[@name='test-Password']").send_keys(
+            "secret_sauce")
+        self.driver.find_element(AppiumBy.IOS_PREDICATE, "name=='test-LOGIN'").click()
+
+        # add to cart 4 items
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-ADD TO CART']").click()
+
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-Cart']").click()
+
+        para_dic = {"direction": "down", "predicateString": "name=='Terms of Service | Privacy Policy'", "toVisible": True}
+        self.driver.execute_script("mobile: scroll", para_dic)
+        # self.driver.execute_script("mobile: scroll", {"direction": "down"})
         self.driver.find_element(AppiumBy.XPATH, "//*[@name='test-CHECKOUT']").click()

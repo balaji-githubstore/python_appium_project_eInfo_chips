@@ -5,6 +5,7 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.extensions.android.nativekey import AndroidKey
+from selenium.webdriver import ActionChains
 
 """Touch actions """
 
@@ -87,3 +88,6 @@ class TestAdvanceCode(AppiumConfig):
     def test_press(self):
         action = TouchAction(self.driver)
         action.press(100, 100).wait(1000).move_to(200, 200).release()
+
+        # action=ActionChains(self.driver)
+        # action.move_by_offset(200, 200).click().perform()
