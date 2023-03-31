@@ -58,3 +58,12 @@ class TestAndroidDeviceLocal(AppiumConfig):
         print(self.driver.device_time)
         self.driver.remove_app("org.khanacademy.android")
         time.sleep(15)
+
+        if self.driver.is_app_installed("org.khanacademy.android"):
+            self.driver.remove_app("org.khanacademy.android")
+
+        # install,open app and allow notification
+        self.driver.install_app(r"C:\Components\khan-academy-7-3-2.apk")
+        self.driver.activate_app("org.khanacademy.android")
+
+        self.driver.find_element(AppiumBy.XPATH, "//android.widget.Button[@text='Allow']").click()
